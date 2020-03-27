@@ -36,15 +36,16 @@ class App extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.bookData.map(book => {
-              return (
-                <tr key={book._id}>
-                  <td>{book._id}</td>
-                  <td>{book.title}</td>
-                  <td>{book.author}</td>
-                </tr>
-              );
-            })}
+            {this.state.bookData &&
+              this.state.bookData.map(book => {
+                return (
+                  <tr key={book._id} data-testid="book-table-row">
+                    <td>{book._id}</td>
+                    <td data-testid="book-title-info">{book.title}</td>
+                    <td data-testid="book-author-info">{book.author}</td>
+                  </tr>
+                );
+              })}
           </tbody>
         </table>
       </div>
