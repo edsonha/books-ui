@@ -2,7 +2,12 @@ import React from "react";
 
 const marginSpacing = { margin: "10px 10px 10px 10px" };
 
-const InputConsole = ({ handleSendButtonClick, handleInputChange }) => {
+const InputConsole = ({
+  handleSendButtonClick,
+  handleInputChange,
+  bookTitle,
+  bookAuthor
+}) => {
   return (
     <div style={marginSpacing}>
       <label style={marginSpacing}>ID</label>
@@ -12,12 +17,14 @@ const InputConsole = ({ handleSendButtonClick, handleInputChange }) => {
         type="search"
         placeholder="Enter Book Title"
         onChange={event => handleInputChange("bookTitle", event)}
+        value={bookTitle}
       />
       <label style={marginSpacing}>Book Author</label>
       <input
         type="search"
         placeholder="Enter Book Author"
         onChange={event => handleInputChange("bookAuthor", event)}
+        value={bookAuthor}
       />
       <button type="button" onClick={handleSendButtonClick}>
         SEND

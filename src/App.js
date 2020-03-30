@@ -58,7 +58,7 @@ class App extends Component {
   };
 
   render() {
-    const { bookData, errorMessage } = this.state;
+    const { bookData, errorMessage, bookTitle, bookAuthor } = this.state;
     return (
       <div>
         <h1 className="center">Hello World from Library Book App!</h1>
@@ -66,6 +66,8 @@ class App extends Component {
         <InputConsole
           handleSendButtonClick={this.handleSendButtonClick}
           handleInputChange={this.handleInputChange}
+          bookTitle={bookTitle}
+          bookAuthor={bookAuthor}
         />
         <Table bookData={bookData} />
         {errorMessage ? (

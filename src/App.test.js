@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import App from "./App";
 import mockAxios from "jest-mock-axios";
 import mockBookData from "./__mocks__/mockBookData";
@@ -34,6 +34,21 @@ describe("Book Table", () => {
     expect(firstBookAuthor).toHaveTextContent(/George Orwell/);
     expect(thirdBookTitle).toHaveTextContent(/Champion/);
     expect(thirdBookAuthor).toHaveTextContent(/Ra Men/);
+  });
+});
+
+describe("Input Console", () => {
+  it("should trigger the onChange function when the input text is filled in", () => {
+    const { getByPlaceholderText } = render(<App />);
+
+    const bookTitleField = getByPlaceholderText("Enter Book Title");
+    const bookAuthorField = getByPlaceholderText("Enter Book Author");
+
+    fireEvent.change(bookTitleField, { target: { value: "test title" } });
+    fireEvent.change(bookAuthorField, { target: { value: "test author" } });
+
+    expect(bookTitleField).toHaveAttribute("value", "test title");
+    expect(bookAuthorField).toHaveAttribute("value", "test author");
   });
 });
 
