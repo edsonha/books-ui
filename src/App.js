@@ -12,7 +12,8 @@ class App extends Component {
       bookData: [],
       action: "post",
       bookTitle: "",
-      bookAuthor: ""
+      bookAuthor: "",
+      errorMessage: ""
     };
   }
 
@@ -28,7 +29,7 @@ class App extends Component {
         });
       },
       err => {
-        console.log(err.message);
+        this.setState({ errorMessage: err.message });
       }
     );
   };
@@ -57,7 +58,7 @@ class App extends Component {
   };
 
   render() {
-    const { bookData } = this.state;
+    const { bookData, errorMessage } = this.state;
     return (
       <div>
         <h1 className="center">Hello World from Library Book App!</h1>
@@ -67,6 +68,13 @@ class App extends Component {
           handleInputChange={this.handleInputChange}
         />
         <Table bookData={bookData} />
+        {errorMessage ? (
+          <h1 className="center" data-testid="error-message">
+            {errorMessage}
+          </h1>
+        ) : (
+          ""
+        )}
       </div>
     );
   }

@@ -36,3 +36,21 @@ describe("Book Table", () => {
     expect(thirdBookAuthor).toHaveTextContent(/Ra Men/);
   });
 });
+
+describe("Error Handling", () => {
+  it("should display error message when there is connection error between the frontend UI and the backend server ", () => {
+    const { getByTestId } = render(<App />);
+
+    mockAxios.mockError({ message: "Network Error" });
+
+    expect(getByTestId("error-message")).toBeInTheDocument();
+  });
+
+  it("should not display error message when there is no connection error", () => {
+    const { queryByTestId } = render(<App />);
+
+    mockAxios.mockResponse({ data: mockBookData });
+
+    expect(queryByTestId("error-message")).not.toBeInTheDocument();
+  });
+});
