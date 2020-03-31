@@ -51,6 +51,7 @@ class App extends Component {
     }).then(
       res => {
         this.dataFetcher();
+        this.setState({ bookId: "", bookTitle: "", bookAuthor: "" });
       },
       err => {
         console.log(err.message);
@@ -62,6 +63,7 @@ class App extends Component {
     const {
       bookData,
       errorMessage,
+      bookId,
       bookTitle,
       bookAuthor,
       action
@@ -73,6 +75,7 @@ class App extends Component {
         <InputConsole
           handleSendButtonClick={this.handleSendButtonClick}
           handleInputChange={this.handleInputChange}
+          bookId={bookId}
           bookTitle={bookTitle}
           bookAuthor={bookAuthor}
           action={action}

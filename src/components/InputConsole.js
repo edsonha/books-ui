@@ -5,6 +5,7 @@ const marginSpacing = { margin: "10px 10px 10px 10px" };
 const InputConsole = ({
   handleSendButtonClick,
   handleInputChange,
+  bookId,
   bookTitle,
   bookAuthor,
   action
@@ -17,6 +18,7 @@ const InputConsole = ({
         type="search"
         placeholder="Enter Book ID"
         onChange={event => handleInputChange("bookId", event)}
+        value={bookId}
       />
       <label style={marginSpacing}>Book Title</label>
       <input
