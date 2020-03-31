@@ -22,6 +22,7 @@ const InputConsole = ({
       />
       <label style={marginSpacing}>Book Title</label>
       <input
+        disabled={action === "delete" || action === "get" ? true : false}
         type="search"
         placeholder="Enter Book Title"
         onChange={event => handleInputChange("bookTitle", event)}
@@ -29,6 +30,7 @@ const InputConsole = ({
       />
       <label style={marginSpacing}>Book Author</label>
       <input
+        disabled={action === "delete" || action === "get" ? true : false}
         type="search"
         placeholder="Enter Book Author"
         onChange={event => handleInputChange("bookAuthor", event)}

@@ -52,6 +52,9 @@ class App extends Component {
       res => {
         this.dataFetcher();
         this.setState({ bookId: "", bookTitle: "", bookAuthor: "" });
+        if (bookId && action === "get") {
+          alert(`${res.data.title} by ${res.data.author} `);
+        }
       },
       err => {
         console.log(err.message);
