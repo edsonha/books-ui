@@ -16,6 +16,7 @@ const InputConsole = ({
         disabled={action === "post" ? true : false}
         type="search"
         placeholder="Enter Book ID"
+        onChange={event => handleInputChange("bookId", event)}
       />
       <label style={marginSpacing}>Book Title</label>
       <input

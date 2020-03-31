@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       bookData: [],
       action: "post",
+      bookId: "",
       bookTitle: "",
       bookAuthor: "",
       errorMessage: ""
@@ -43,8 +44,8 @@ class App extends Component {
   };
 
   handleSendButtonClick = async () => {
-    const { bookTitle, bookAuthor, action } = this.state;
-    await axios[action]("http://localhost:3001/books", {
+    const { bookTitle, bookAuthor, action, bookId } = this.state;
+    await axios[action](`http://localhost:3001/books/${bookId}`, {
       title: bookTitle,
       author: bookAuthor
     }).then(
