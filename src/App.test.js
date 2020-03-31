@@ -41,12 +41,15 @@ describe("Input Console", () => {
   it("should trigger the onChange function when the input text is filled in", () => {
     const { getByPlaceholderText } = render(<App />);
 
+    const bookIdField = getByPlaceholderText("Enter Book ID");
     const bookTitleField = getByPlaceholderText("Enter Book Title");
     const bookAuthorField = getByPlaceholderText("Enter Book Author");
 
+    fireEvent.change(bookIdField, { target: { value: "12345" } });
     fireEvent.change(bookTitleField, { target: { value: "test title" } });
     fireEvent.change(bookAuthorField, { target: { value: "test author" } });
 
+    expect(bookIdField).toHaveAttribute("value", "12345");
     expect(bookTitleField).toHaveAttribute("value", "test title");
     expect(bookAuthorField).toHaveAttribute("value", "test author");
   });
