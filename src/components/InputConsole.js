@@ -6,12 +6,17 @@ const InputConsole = ({
   handleSendButtonClick,
   handleInputChange,
   bookTitle,
-  bookAuthor
+  bookAuthor,
+  action
 }) => {
   return (
     <div style={marginSpacing}>
       <label style={marginSpacing}>ID</label>
-      <input type="search" placeholder="Enter Book ID" />
+      <input
+        disabled={action === "post" ? true : false}
+        type="search"
+        placeholder="Enter Book ID"
+      />
       <label style={marginSpacing}>Book Title</label>
       <input
         type="search"
