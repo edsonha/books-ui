@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   dataFetcher = () => {
-    axios.get(process.env.REACT_APP_API_URL + "/books").then(
+    axios.get(process.env.REACT_APP_REST_API_LOCATION + "/books").then(
       res => {
         this.setState({
           bookData: res.data
@@ -45,10 +45,13 @@ class App extends Component {
 
   handleSendButtonClick = async () => {
     const { bookTitle, bookAuthor, action, bookId } = this.state;
-    await axios[action](process.env.REACT_APP_API_URL + `/books/${bookId}`, {
-      title: bookTitle,
-      author: bookAuthor
-    }).then(
+    await axios[action](
+      process.env.REACT_APP_REST_API_LOCATION + `/books/${bookId}`,
+      {
+        title: bookTitle,
+        author: bookAuthor
+      }
+    ).then(
       res => {
         this.dataFetcher();
         this.setState({ bookId: "", bookTitle: "", bookAuthor: "" });
