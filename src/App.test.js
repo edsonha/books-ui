@@ -28,7 +28,6 @@ describe("Book Table", () => {
     const thirdBookAuthor = getAllByTestId("book-author-info")[2];
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
-    expect(mockAxios.get).toHaveBeenCalledWith("http://localhost:3001/books");
     expect(getAllByTestId("book-table-row").length).toEqual(3);
     expect(firstBookTitle).toHaveTextContent(/1983/);
     expect(firstBookAuthor).toHaveTextContent(/George Orwell/);
