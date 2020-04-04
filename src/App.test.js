@@ -52,6 +52,30 @@ describe("Input Console", () => {
     expect(bookTitleField).toHaveAttribute("value", "test title");
     expect(bookAuthorField).toHaveAttribute("value", "test author");
   });
+
+  it("should disable some input text for different action: Create, Update and Delete", () => {
+    const { getByTestId, getByPlaceholderText } = render(<App />);
+
+    const bookIdInput = getByPlaceholderText("Enter Book ID");
+    const bookTitleInput = getByPlaceholderText("Enter Book Title");
+    const bookAuthorInput = getByPlaceholderText("Enter Book Author");
+
+    const select = getByTestId("select-action");
+    fireEvent.change(select, { target: { value: "delete" } });
+    expect(bookIdInput).not.toHaveAttribute("disabled");
+    expect(bookTitleInput).toHaveAttribute("disabled");
+    expect(bookAuthorInput).toHaveAttribute("disabled");
+
+    fireEvent.change(select, { target: { value: "post" } });
+    expect(bookIdInput).toHaveAttribute("disabled");
+    expect(bookTitleInput).not.toHaveAttribute("disabled");
+    expect(bookAuthorInput).not.toHaveAttribute("disabled");
+
+    fireEvent.change(select, { target: { value: "put" } });
+    expect(bookIdInput).not.toHaveAttribute("disabled");
+    expect(bookTitleInput).not.toHaveAttribute("disabled");
+    expect(bookAuthorInput).not.toHaveAttribute("disabled");
+  });
 });
 
 describe("Error Handling", () => {

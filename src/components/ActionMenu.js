@@ -4,7 +4,7 @@ const ActionMenu = ({ handleSelectAction }) => {
   return (
     <div>
       <label>Choose Action: </label>
-      <select onChange={handleSelectAction}>
+      <select data-testid="select-action" onChange={handleSelectAction}>
         <option value="post">CREATE</option>
         <option value="get">READ</option>
         <option value="put">UPDATE</option>
