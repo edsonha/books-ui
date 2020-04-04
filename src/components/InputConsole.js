@@ -8,7 +8,7 @@ const InputConsole = ({
   bookId,
   bookTitle,
   bookAuthor,
-  action
+  action,
 }) => {
   return (
     <div style={marginSpacing}>
@@ -17,7 +17,7 @@ const InputConsole = ({
         disabled={action === "post" ? true : false}
         type="search"
         placeholder="Enter Book ID"
-        onChange={event => handleInputChange("bookId", event)}
+        onChange={(event) => handleInputChange("bookId", event)}
         value={bookId}
       />
       <label style={marginSpacing}>Book Title</label>
@@ -25,7 +25,7 @@ const InputConsole = ({
         disabled={action === "delete" || action === "get" ? true : false}
         type="search"
         placeholder="Enter Book Title"
-        onChange={event => handleInputChange("bookTitle", event)}
+        onChange={(event) => handleInputChange("bookTitle", event)}
         value={bookTitle}
       />
       <label style={marginSpacing}>Book Author</label>
@@ -33,7 +33,7 @@ const InputConsole = ({
         disabled={action === "delete" || action === "get" ? true : false}
         type="search"
         placeholder="Enter Book Author"
-        onChange={event => handleInputChange("bookAuthor", event)}
+        onChange={(event) => handleInputChange("bookAuthor", event)}
         value={bookAuthor}
       />
       <button type="button" onClick={handleSendButtonClick}>

@@ -1,16 +1,16 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
-import App from "./App";
+import HomePage from "./HomePage";
 import mockAxios from "jest-mock-axios";
-import mockBookData from "./__mocks__/mockBookData";
+import mockBookData from "../../__mocks__/mockBookData";
 
 afterEach(() => {
   mockAxios.reset();
 });
 
-describe("App", () => {
+describe("HomePage", () => {
   it("should render Hello World", () => {
-    const { getByText } = render(<App />);
+    const { getByText } = render(<HomePage />);
     const textElement = getByText(/Hello World from Library Book App!/i);
     expect(textElement).toBeInTheDocument();
   });
@@ -18,7 +18,7 @@ describe("App", () => {
 
 describe("Book Table", () => {
   it("should display list of 3 books with id, title and author name", () => {
-    const { getAllByTestId } = render(<App />);
+    const { getAllByTestId } = render(<HomePage />);
 
     mockAxios.mockResponse({ data: mockBookData });
 
@@ -38,7 +38,7 @@ describe("Book Table", () => {
 
 describe("Input Console", () => {
   it("should trigger the onChange function when the input text is filled in", () => {
-    const { getByPlaceholderText } = render(<App />);
+    const { getByPlaceholderText } = render(<HomePage />);
 
     const bookIdField = getByPlaceholderText("Enter Book ID");
     const bookTitleField = getByPlaceholderText("Enter Book Title");
@@ -54,7 +54,7 @@ describe("Input Console", () => {
   });
 
   it("should disable some input text for different action: Create, Update and Delete", () => {
-    const { getByTestId, getByPlaceholderText } = render(<App />);
+    const { getByTestId, getByPlaceholderText } = render(<HomePage />);
 
     const bookIdInput = getByPlaceholderText("Enter Book ID");
     const bookTitleInput = getByPlaceholderText("Enter Book Title");
@@ -80,7 +80,7 @@ describe("Input Console", () => {
 
 describe("Error Handling", () => {
   it("should display error message when there is connection error between the frontend UI and the backend server ", () => {
-    const { getByTestId } = render(<App />);
+    const { getByTestId } = render(<HomePage />);
 
     mockAxios.mockError({ message: "Network Error" });
 
@@ -88,7 +88,7 @@ describe("Error Handling", () => {
   });
 
   it("should not display error message when there is no connection error", () => {
-    const { queryByTestId } = render(<App />);
+    const { queryByTestId } = render(<HomePage />);
 
     mockAxios.mockResponse({ data: mockBookData });
 
