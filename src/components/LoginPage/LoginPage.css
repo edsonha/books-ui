@@ -42,3 +42,7 @@
   width: 200px;
   margin-top: 5%;
 }
+
+.error-text {
+  color: red;
+}

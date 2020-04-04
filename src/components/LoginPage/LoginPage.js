@@ -1,12 +1,14 @@
 import React, { Component } from "react";
+import axios from "axios";
 import "./LoginPage.css";
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      email: "",
       password: "",
+      error: "",
     };
   }
 
@@ -14,21 +16,35 @@ class LoginPage extends Component {
     this.setState({ [name]: event.target.value });
   };
 
+  loginUser = async () => {
+    const { email, password } = this.state;
+    await axios
+      .post(process.env.REACT_APP_API_URL + `/users/login`, {
+        email,
+        password,
+      })
+      .then((res) => {
+        this.props.history.push("/home");
+        console.log(res.data.name, res.data.books);
+      })
+      .catch((err) => this.setState({ error: err.response.data.message }));
+  };
+
   render() {
-    const { username, password } = this.state;
+    const { email, password, error } = this.state;
 
     return (
       <React.Fragment>
         <form className="login-form">
           <h1>Book App</h1>
           <div>
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
               className="detail-box"
               type="search"
-              placeholder="Enter username"
-              onChange={(event) => this.handleInputChange("username", event)}
-              value={username}
+              placeholder="Enter email"
+              onChange={(event) => this.handleInputChange("email", event)}
+              value={email}
             />
           </div>
           <div>
@@ -45,6 +61,7 @@ class LoginPage extends Component {
             data-testid="login-button"
             className="login-btn"
             type="button"
+            onClick={this.loginUser}
           >
             Login
           </button>
@@ -55,6 +72,7 @@ class LoginPage extends Component {
           >
             Register
           </button>
+          {error && <p className="error-text">{error}</p>}
         </form>
       </React.Fragment>
     );

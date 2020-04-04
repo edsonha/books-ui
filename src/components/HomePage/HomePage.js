@@ -48,18 +48,17 @@ class HomePage extends Component {
     await axios[action](process.env.REACT_APP_API_URL + `/books/${bookId}`, {
       title: bookTitle,
       author: bookAuthor,
-    }).then(
-      (res) => {
+    })
+      .then((res) => {
         this.dataFetcher();
         this.setState({ bookId: "", bookTitle: "", bookAuthor: "" });
         if (bookId && action === "get") {
           alert(`${res.data.title} by ${res.data.author} `);
         }
-      },
-      (err) => {
+      })
+      .catch((err) => {
         console.log(err.message);
-      }
-    );
+      });
   };
 
   render() {
