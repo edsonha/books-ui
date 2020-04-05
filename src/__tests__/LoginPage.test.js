@@ -1,5 +1,8 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
+import { Router } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import App from "../App";
 import LoginPage from "../components/LoginPage/LoginPage";
 import mockAxios from "jest-mock-axios";
 
@@ -49,5 +52,24 @@ describe("Login functionality", () => {
 
     expect(mockAxios.post).toHaveBeenCalledTimes(1);
     expect(getByText("Wrong credentials")).toBeInTheDocument();
+  });
+
+  it("should be able to login user when correct credential is given and go to homepage", () => {
+    const history = createMemoryHistory({ initialEntries: ["/"] });
+    const { getByTestId, getByText } = render(
+      <Router history={history}>
+        <App />
+      </Router>
+    );
+
+    const loginButton = getByTestId("login-button");
+
+    fireEvent.click(loginButton);
+    mockAxios.mockResponse({
+      data: { name: "John", books: [] },
+    });
+
+    expect(mockAxios.post).toHaveBeenCalledTimes(1);
+    expect(getByText("Hello World from Library Book App!")).toBeInTheDocument();
   });
 });
